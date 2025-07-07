@@ -1,0 +1,8 @@
+packages:
+  - "packages/plugins/*"
+  - "packages/shell"
+  - "packages/ui"
+  - "packages/sclsdk"
+  - "packages/fileio"
+
+linkWorkspacePackages: true

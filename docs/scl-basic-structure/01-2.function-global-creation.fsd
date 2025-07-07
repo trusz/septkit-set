@@ -1,0 +1,38 @@
+<SCL>
+<!-- This file picture a Function creation on a global level -->
+<!-- FSD SHOULD ONLY CONTAIN ONE FUNCTION -->
+
+  <Substation>
+    <!-- START CREATION - FunctionCategory -->
+    <Private type="eIEC61850-6-100">
+      <!-- Categorization in the context of the function (vs Application FunctionRole) -->
+      <!-- Elia Modelling : only authorized at Substation level = for global use -->
+      <eIEC61850-6-100:FunctionCategory name="dummyScopedFunctionCategory">
+        <eIEC61850-6-100:FunctionCatRef functionUuid="456" />
+      </eIEC61850-6-100:FunctionCategory>
+    </Private>
+    <!-- END CREATION - FunctionCategory -->
+  </Substation>
+
+  <!-- NOT EDITION READY = NAMESPACE + PRIVATE CONTAINER REQUIRED -->
+  <!-- START CREATION - FunctionTemplate -->
+  <Private type="eIEC61850-6-100">
+    <eIEC61850-6-100:FunctionTemplate name="dummyGlobalFunction" uuid="456">
+      <LNode type="dummyLNodeType">
+        <Private type="eIEC61850-6-100">
+          <!-- Contains original specification -->
+          <!-- One per LNode -->
+          <!-- last state of the LNode before implementation in a real device -->
+          <!-- to be able to differentiate the changed LNode after Process ICD instantiation -->
+          <!-- Elia Modelling guidelines : sLdInst = function name -->
+          <eIEC61850-6-100:LNodeSpecNaming sIedName="None" sLdInst="dummyGlobalFunction" sLnInst="" sPrefix="" sLnClass=""/>
+        </Private>
+      </LNode>
+    </eIEC61850-6-100:FunctionTemplate>
+  </Private>
+  <!-- END CREATION - FunctionTemplate -->
+
+  <DataTypeTemplates>
+    <LNodeType name="dummyLNodeType" />
+  </DataTypeTemplate>
+</SCL>
