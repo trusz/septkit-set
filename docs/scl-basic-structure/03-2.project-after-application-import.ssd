@@ -1,5 +1,0 @@
-<!-- A SSD Project is an instantiated version of a SSD Template -->
-<!-- when instantiated into a project, all Substation > VoltageLevel > Bay get a real name (no more TEMPLATE) -->
-<!-- multiple SSD can be imported -->
-<!-- template structure should be respected to create the wanted structure -->
-<!-- if the template SSD is only containing an application in a Bay[name=TEMPLATE], and no Bay is already there, the import is not possible -->
