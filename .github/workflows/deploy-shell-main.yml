@@ -2,19 +2,16 @@ name: Publish Main
 
 on:
   workflow_dispatch:
-  workflow_call:
-    inputs:
-      package-name: # the scripts appends the `packages/` part. eg.: shell is enough
-        required: true
-        type: string
+  push:
+    branches:
+      - main
   
-
 jobs:
   install:
     name: Install Dependencies
     uses: ./.github/workflows/_install.yml
     with:
-      package-name: ${{inputs.package-name}}
+      package-name: shell
 
 #   build:
 #     name: Build Project
