@@ -32,7 +32,7 @@ jobs:
       - name: Restore node_modules cache
         uses: actions/cache@v3
         with:
-          path: node_modules
+          path: packages/${{inputs.package-name}}/node_modules
           key: ${{ runner.os }}-node-modules-${{inputs.package-name}}-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-node-modules-${{inputs.package-name}}
