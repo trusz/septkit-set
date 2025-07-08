@@ -37,15 +37,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-modules-${{inputs.package-name}}
 
-      - name: Build
-        working-directory: packages/${{ inputs.package-name }}
-        run: pnpm build
+      # - name: Build
+      #   working-directory: packages/${{ inputs.package-name }}
+      #   run: pnpm build
 
-      - name: Cache build output
-        id: cache-build-output
-        uses: actions/cache@v3
-        with:
-          path: dist
-          key: ${{ runner.os }}-build-output-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-build-output-${{inputs.package-name}}
+      # - name: Cache build output
+      #   id: cache-build-output
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: dist
+      #     key: ${{ runner.os }}-build-output-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-build-output-${{inputs.package-name}}
