@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-  
+
 jobs:
   install:
     name: Install Dependencies
@@ -13,16 +13,16 @@ jobs:
     with:
       package-name: shell
 
-#   build:
-#     name: Build Project
-#     needs: install
-#     uses: ./.github/workflows/_build.yml
-
-#   test:
-#     name: Run Tests
-#     needs: install
-#     uses: ./.github/workflows/_test.yml
-
+  build:
+    name: Build Project
+    needs: install
+    uses: ./.github/workflows/_build.yml
+    with:
+      package-name: shell
+  # test:
+  #   name: Run Tests
+  #   needs: install
+  #   uses: ./.github/workflows/_test.yml
 #   check-version:
 #     name: Check Package Version
 #     uses: ./.github/workflows/_check-version.yml
