@@ -18,6 +18,11 @@ jobs:
       cache-key: ${{ steps.cache-node-modules.outputs.cache-hit }}
 
     steps:
+
+      - name: debug step
+        run: |
+          echo "Running install for package: ${{ inputs.package-name }}"
+
       - name: Checkout
         uses: actions/checkout@v4
 
