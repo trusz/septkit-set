@@ -37,9 +37,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-modules-${{inputs.package-name}}
 
-      # - name: Build
-      #   working-directory: packages/${{ inputs.package-name }}
-      #   run: pnpm build
+      - name: Build
+        working-directory: packages/${{ inputs.package-name }}
+        run: pnpm build
 
       # - name: Cache build output
       #   id: cache-build-output
