@@ -1,4 +1,4 @@
-name: Publish Main
+name: Deploy Shell
 
 on:
   workflow_dispatch:
