@@ -20,26 +20,30 @@ jobs:
       build-cache-key: ${{ steps.cache-build-output.outputs.cache-hit }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Debugging step
+        run: |
+          echo "Running build for package: ${{ inputs.package-name }}"
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.10.0
-          run_install: false
+      # - name: Checkout
+      #   uses: actions/checkout@v4
 
-      - name: Restore node_modules cache
-        uses: actions/cache@v3
-        with:
-          path: packages/${{inputs.package-name}}/node_modules
-          key: ${{ runner.os }}-node-modules-${{inputs.package-name}}-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-${{inputs.package-name}}
+      # - name: Install pnpm
+      #   uses: pnpm/action-setup@v4
+      #   with:
+      #     version: 10.10.0
+      #     run_install: false
 
-      - name: Build
-        working-directory: packages/${{ inputs.package-name }}
-        run: pnpm build
+      # - name: Restore node_modules cache
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: packages/${{inputs.package-name}}/node_modules
+      #     key: ${{ runner.os }}-node-modules-${{inputs.package-name}}-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-node-modules-${{inputs.package-name}}
+
+      # - name: Build
+      #   working-directory: packages/${{ inputs.package-name }}
+      #   run: pnpm build
 
       # - name: Cache build output
       #   id: cache-build-output
