@@ -33,6 +33,12 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
+      - name: debug step
+        run: |
+          echo "Package name: ${{ inputs.package-name }}"
+          echo "Working directory: packages/${{ inputs.package-name }}"
+          pnpm config get sharedWorkspaceLockfile --location project
+
       - name: Cache node_modules
         id: cache-node-modules
         uses: actions/cache@v3
