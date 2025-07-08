@@ -19,12 +19,12 @@ jobs:
 
     steps:
 
-      - name: debug step
-        run: |
-          echo "Running install for package: ${{ inputs.package-name }}"
+      # - name: debug step
+      #   run: |
+      #     echo "Running install for package: ${{ inputs.package-name }}"
 
-      # - name: Checkout
-      #   uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       # - uses: pnpm/action-setup@v4
       #   name: Install pnpm
