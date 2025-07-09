@@ -39,6 +39,7 @@ jobs:
           echo "Working directory: packages/${{ inputs.package-name }}"
           pnpm config get sharedWorkspaceLockfile --location project
           ls -la packages/${{ inputs.package-name }}/pnpm-lock.yaml
+          echo GITHUB_WORKSPACE: ${{ github.workspace }} - $GITHUB_WORKSPACE
           echo hash: ${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
 
       - name: Cache node_modules
