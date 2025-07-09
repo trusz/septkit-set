@@ -23,6 +23,8 @@ jobs:
     name: Run Tests
     needs: install
     uses: ./.github/workflows/_test.yml
+    with:
+      package-name: shell
 #   check-version:
 #     name: Check Package Version
 #     uses: ./.github/workflows/_check-version.yml
