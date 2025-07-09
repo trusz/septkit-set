@@ -23,13 +23,28 @@ jobs:
     outputs:
       version_changed: ${{ steps.compare_versions.outputs.version_changed }}
     steps:
+      - name: Verify Branch
+        id: verify_branch
+        run: |
+          export BRANCHES=$(git branch -r)
+          echo $BRANCHES | grep gh-pages
+          if [ $? -ne 0 ]; then
+            echo "gh_pages_branch_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "gh_pages_branch_exists=false" >> $GITHUB_OUTPUT 
+            echo "version_changed=true" >> $GITHUB_OUTPUT
+            echo "No gh-pages branch found, skipping version check."
+          fi
+
       - name: Checkout Deployed App
         uses: actions/checkout@v3
+        if: ${{ steps.verify_branch.outputs.gh_pages_branch_exists == 'true' }}
         with:
           ref: 'gh-pages'
 
       - name: Extract Deployed Version
         id: get_version
+        if: ${{ steps.verify_branch.outputs.gh_pages_branch_exists == 'true' }}
         run: |
           DEPLOYED_VERSION=$(grep version package.json | sed 's/.*"version": "\(.*\)".*/\1/')
           echo "Deployed version: $DEPLOYED_VERSION"
@@ -37,11 +52,13 @@ jobs:
 
       - name: Checkout Main Branch
         uses: actions/checkout@v3
+        if: ${{ steps.verify_branch.outputs.gh_pages_branch_exists == 'true' }}
         with:
           ref: 'main' # or the branch you want to compare against
 
       - name: Extract Current Version
         id: current_version
+        if: ${{ steps.verify_branch.outputs.gh_pages_branch_exists == 'true' }}
         working-directory: packages/${{ inputs.package-name }}
         run: |
           CURRENT_VERSION=$(grep version package.json | sed 's/.*"version": "\(.*\)".*/\1/')
@@ -50,6 +67,7 @@ jobs:
 
       - name: Compare Versions
         id: compare_versions
+        if: ${{ steps.verify_branch.outputs.gh_pages_branch_exists == 'true' }}
         run: |
           if [ "${{ steps.get_version.outputs.deployed_version }}" != "${{ steps.current_version.outputs.current_version }}" ]; then
             echo "Version has changed: ${{ steps.get_version.outputs.deployed_version }} -> ${{ steps.current_version.outputs.current_version }}"
