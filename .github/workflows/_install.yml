@@ -60,7 +60,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: packages/${{inputs.package-name}}/node_modules
-          key: ${{ runner.os }}-node-modules-${{inputs.package-name}}-${{ hashFiles('**/packages/${{inputs.package-name}}/pnpm-lock.yaml') }}-
+          key: ${{ runner.os }}-node-modules-${{inputs.package-name}}-${{ hashFiles( format('**/packages/{0}/pnpm-lock.yaml',inputs.package-name) ) }}
 
       - name: Install dependencies
         working-directory: packages/${{ inputs.package-name }}
