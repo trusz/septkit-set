@@ -27,33 +27,11 @@ jobs:
           version: 10.10.0
           run_install: false
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-
-      - name: debug step
-        run: |
-          echo "Package name: ${{ inputs.package-name }}"
-          echo "Working directory: packages/${{ inputs.package-name }}"
-          pnpm config get sharedWorkspaceLockfile --location project
-          ls -la packages/${{ inputs.package-name }}/pnpm-lock.yaml
-          pwd
-          ls -la
-          ls -la ${{ github.workspace }}/packages/${{ inputs.package-name }}
-          echo GITHUB_WORKSPACE: ${{ github.workspace }} - $GITHUB_WORKSPACE
-          echo hash: ${{ hashFiles('**/packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
-          echo hash: ${{ hashFiles('${{ github.workspace }}/packages/${{ inputs.package-name }}') }}
-          echo hash:workspace: ${{ hashFiles('**/pnpm-workspace.yaml') }}
-          export PACKAGE_NAME=${{ inputs.package-name }}
-          echo hash:fix: ${{ hashFiles('**/packages/shell/pnpm-lock.yaml') }}
-          echo hash:variable: ${{ hashFiles( format('**/packages/{0}/pnpm-lock.yaml',inputs.package-name) ) }}
-          echo hash:env variable: ${{ hashFiles('**/packages/$PACKAGE_NAME/pnpm-lock.yaml') }}
-          echo "PACKAGE_NAME: $PACKAGE_NAME"
-          echo fix '**/packages/shell/pnpm-lock.yaml'
-          echo variable '**/packages/${{ inputs.package-name }}/pnpm-lock.yaml'
-          echo env variable "**/packages/$PACKAGE_NAME/pnpm-lock.yaml"
+      # - name: Install Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20
+      #     cache: 'pnpm'
 
       - name: Cache node_modules
         id: cache-node-modules
