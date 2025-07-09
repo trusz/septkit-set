@@ -35,7 +35,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: 'packages/${{inputs.package-name}}/dist'
-          key: ${{ runner.os }}-build-output-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-build-output-${{ hashFiles( format('**/packages/{0}/pnpm-lock.yaml',inputs.package-name) ) }}-dist
 
       - name: Verify build output exists
         run: ls -la 'packages/${{ inputs.package-name }}/dist'
