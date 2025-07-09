@@ -29,7 +29,7 @@ jobs:
       - name: Verify Branch
         id: verify_branch
         run: |
-          output=$(git branch -r | grep "origin/infra" || true)
+          output=$(git branch -r | grep "origin/gh-pages" || true)
           if [ -n "$output" ]; then
             echo "gh_pages_branch_exists=true" >> $GITHUB_OUTPUT
           else
