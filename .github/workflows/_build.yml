@@ -45,7 +45,7 @@ jobs:
         id: cache-build-output
         uses: actions/cache@v3
         with:
-          path: dist
+          path: packages/${{inputs.package-name}}/dist
           key: ${{ runner.os }}-build-output-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-build-output-${{inputs.package-name}}
