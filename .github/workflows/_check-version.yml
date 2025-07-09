@@ -21,7 +21,7 @@ jobs:
     name: Get Deployed Version
     runs-on: ubuntu-latest
     outputs:
-      deployed_version: ${{ steps.get_version.outputs.deployed_version }}
+      version_changed: ${{ steps.compare_versions.outputs.version_changed }}
     steps:
       - name: Checkout Deployed App
         uses: actions/checkout@v3
