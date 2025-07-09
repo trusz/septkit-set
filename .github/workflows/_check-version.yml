@@ -81,9 +81,11 @@ jobs:
       - name: Mergin Outputs
         id: final_output
         run: |
-          verify_branch_verchion_changesd="${{ steps.verify_branch.outputs.gh_pages_branch_exists }}"
+          verify_branch_version_changed="${{ steps.verify_branch.outputs.gh_pages_branch_exists }}"
           compare_versions_version_changed="${{ steps.compare_versions.outputs.version_changed }}"
-          if [ "$verify_branch_verchion_changesd" == "true" ] || [ "$compare_versions_version_changed" == "true" ]; then
+          echo "verify_branch_version_changed: $verify_branch_version_changed"
+          echo "compare_versions_version_changed: $compare_versions_version_changed"
+          if [ "$verify_branch_version_changed" == "true" ] || [ "$compare_versions_version_changed" == "true" ]; then
             echo "version_changed=true" >> $GITHUB_OUTPUT
           else
             echo "version_changed=false" >> $GITHUB_OUTPUT
