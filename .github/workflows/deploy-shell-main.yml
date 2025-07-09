@@ -25,10 +25,15 @@ jobs:
     uses: ./.github/workflows/_test.yml
     with:
       package-name: shell
-#   check-version:
-#     name: Check Package Version
-#     uses: ./.github/workflows/_check-version.yml
-
+  deploy:
+    name: Deploy To Pages
+    needs:
+      - build
+      - test
+      # - check-version
+    uses: ./.github/workflows/_deploy.yml
+    with:
+      package-name: shell
 #   publish:
 #     name: Publish to npm
 #     needs:

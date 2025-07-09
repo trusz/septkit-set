@@ -1,0 +1,51 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      package-name: # the scripts appends the `packages/` part. eg.: shell is enough
+        required: true
+        type: string
+      target-folder:
+        description: 'The folder to deploy to, relative to the repository root. Default is "."'
+        required: false
+        type: string
+        default: '.'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 'latest'
+      #     registry-url: 'https://registry.npmjs.org'
+      #     scope: '@openscd'
+
+      - name: Restore build output cache
+        uses: actions/cache@v3
+        with:
+          path: 'packages/${{inputs.package-name}}/dist'
+          key: ${{ runner.os }}-build-output-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-output-${{inputs.package-name}}
+
+      - name: Verify build output exists
+        run: ls -la 'packages/${{ inputs.package-name }}/dist'
+
+      - name: Deploy To Pages
+        id: deploy-to-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: 'packages/${{inputs.package-name}}/dist'
+          target-folder: ${{ inputs.target-folder }}
