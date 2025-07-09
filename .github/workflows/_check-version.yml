@@ -29,16 +29,14 @@ jobs:
       - name: Verify Branch
         id: verify_branch
         run: |
-          export BRANCHES=$(git branch -r)
-          echo $BRANCHES | grep gh-pages
-          if [ $? -ne 0 ]; then
+          git branch -r | grep gh-pages
+          if [ $? -eq 0 ]; then
             echo "gh_pages_branch_exists=true" >> $GITHUB_OUTPUT
           else
             echo "gh_pages_branch_exists=false" >> $GITHUB_OUTPUT 
             echo "version_changed=true" >> $GITHUB_OUTPUT
             echo "No gh-pages branch found, skipping version check."
           fi
-
       - name: Checkout Deployed App
         uses: actions/checkout@v3
         if: ${{ steps.verify_branch.outputs.gh_pages_branch_exists == 'true' }}
