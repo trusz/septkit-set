@@ -40,14 +40,14 @@ jobs:
           pnpm config get sharedWorkspaceLockfile --location project
           ls -la packages/${{ inputs.package-name }}/pnpm-lock.yaml
           echo GITHUB_WORKSPACE: ${{ github.workspace }} - $GITHUB_WORKSPACE
-          echo hash: ${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
+          echo hash: ${{ hashFiles('**/packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
 
       - name: Cache node_modules
         id: cache-node-modules
         uses: actions/cache@v3
         with:
           path: packages/${{inputs.package-name}}/node_modules
-          key: ${{ runner.os }}-node-modules-${{inputs.package-name}}-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}-
+          key: ${{ runner.os }}-node-modules-${{inputs.package-name}}-${{ hashFiles('**/packages/${{inputs.package-name}}/pnpm-lock.yaml') }}-
 
       - name: Install dependencies
         working-directory: packages/${{ inputs.package-name }}
