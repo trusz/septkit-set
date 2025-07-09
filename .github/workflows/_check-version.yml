@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v3
         if: ${{ steps.verify_branch.outputs.gh_pages_branch_exists == 'true' }}
         with:
-          ref: 'main' # or the branch you want to compare against
+          ref: 'main'
 
       - name: Extract Current Version
         id: current_version
@@ -80,6 +80,9 @@ jobs:
             echo "version_changed=false" >> $GITHUB_OUTPUT
           fi
 
+      # Mergin Outputs is necessary because if there is no gh-pages, then the
+      # compare version step will nut run and otherwise
+      # the verify branch step will not set the output to true
       - name: Mergin Outputs
         id: final_output
         run: |
