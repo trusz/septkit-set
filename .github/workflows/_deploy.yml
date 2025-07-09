@@ -36,8 +36,6 @@ jobs:
         with:
           path: 'packages/${{inputs.package-name}}/dist'
           key: ${{ runner.os }}-build-output-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-build-output-${{inputs.package-name}}
 
       - name: Verify build output exists
         run: ls -la 'packages/${{ inputs.package-name }}/dist'

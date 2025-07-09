@@ -32,8 +32,6 @@ jobs:
         with:
           path: packages/${{inputs.package-name}}/node_modules
           key: ${{ runner.os }}-node-modules-${{inputs.package-name}}-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-${{inputs.package-name}}
 
       - name: Restore Playwright cache
         id: playwright-cache
@@ -41,8 +39,6 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{inputs.package-name}}-${{ hashFiles('packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-${{inputs.package-name}}
 
       - name: Install Playwright browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
