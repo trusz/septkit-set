@@ -21,7 +21,7 @@ jobs:
     name: Get Deployed Version
     runs-on: ubuntu-latest
     outputs:
-      version_changed: ${{ steps.compare_versions.outputs.version_changed }}
+      version_changed: ${{ steps.final_output.outputs.version_changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -75,5 +75,16 @@ jobs:
             echo "version_changed=true" >> $GITHUB_OUTPUT
           else
             echo "Version unchanged"
+            echo "version_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Mergin Outputs
+        id: final_output
+        run: |
+          verify_branch_verchion_changesd="${{ steps.verify_branch.outputs.gh_pages_branch_exists }}"
+          compare_versions_version_changed="${{ steps.compare_versions.outputs.version_changed }}"
+          if [ "$verify_branch_verchion_changesd" == "true" ] || [ "$compare_versions_version_changed" == "true" ]; then
+            echo "version_changed=true" >> $GITHUB_OUTPUT
+          else
             echo "version_changed=false" >> $GITHUB_OUTPUT
           fi
