@@ -45,6 +45,7 @@ jobs:
           echo GITHUB_WORKSPACE: ${{ github.workspace }} - $GITHUB_WORKSPACE
           echo hash: ${{ hashFiles('**/packages/${{inputs.package-name}}/pnpm-lock.yaml') }}
           echo hash: ${{ hashFiles('${{ github.workspace }}/packages/${{ inputs.package-name }}') }}
+          echo hash:workspace: ${{ hashFiles('**/pnpm-workspace.yaml') }}
 
       - name: Cache node_modules
         id: cache-node-modules
