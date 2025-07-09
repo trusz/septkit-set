@@ -49,11 +49,11 @@ jobs:
           export PACKAGE_NAME=${{ inputs.package-name }}
           echo hash:fix: ${{ hashFiles('**/packages/shell/pnpm-lock.yaml') }}
           echo hash:variable: ${{ hashFiles('**/packages/${{ inputs.package-name }}/pnpm-lock.yaml') }}
-          echo hash:env variable: ${{ hashFiles('**/packages/${PACKAGE_NAME}/pnpm-lock.yaml') }}
+          echo hash:env variable: ${{ hashFiles('**/packages/$PACKAGE_NAME/pnpm-lock.yaml') }}
           echo "PACKAGE_NAME: $PACKAGE_NAME"
           echo fix '**/packages/shell/pnpm-lock.yaml'
           echo variable '**/packages/${{ inputs.package-name }}/pnpm-lock.yaml'
-          echo env variable '**/packages/${PACKAGE_NAME}/pnpm-lock.yaml'
+          echo env variable '**/packages/$PACKAGE_NAME/pnpm-lock.yaml'
 
       - name: Cache node_modules
         id: cache-node-modules
