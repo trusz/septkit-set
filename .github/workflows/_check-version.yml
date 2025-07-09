@@ -81,7 +81,7 @@ jobs:
       - name: Mergin Outputs
         id: final_output
         run: |
-          verify_branch_version_changed="${{ steps.verify_branch.outputs.gh_pages_branch_exists }}"
+          verify_branch_version_changed="${{ steps.verify_branch.outputs.version_changed }}"
           compare_versions_version_changed="${{ steps.compare_versions.outputs.version_changed }}"
           echo "verify_branch_version_changed: $verify_branch_version_changed"
           echo "compare_versions_version_changed: $compare_versions_version_changed"
